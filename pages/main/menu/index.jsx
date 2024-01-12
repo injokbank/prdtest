@@ -1,8 +1,25 @@
 import BottomBar from '@/components/Main/BottomBar'
 import Link from 'next/link'
-import React from 'react'
-
+import React, { useEffect } from 'react'
+import useSWR from "swr";
+import fetcher from "@/pages/api/fetch.js";
 function menu() {
+
+  const uri = "/ib20/act/PBKMAN0000002300A";
+  const { data, error, isLoading } = useSWR(uri, fetcher);
+  let groupedData = [];
+  
+  useEffect(() => {
+    data?._msg_._body_?.savedMenuLists.map((item)=>{
+      const category = item.CATEGORY_SEQ;
+      if(!groupedData[category]){
+        groupedData[category] = [];
+      }
+      groupedData[category].push(item);
+    });
+    console.log(`#### groupedData : ` + JSON.stringify(groupedData));
+  },[data]);
+
   return (
     <>
     <div id="wrap-mmk">
@@ -13,57 +30,12 @@ function menu() {
             <div className="kbank-page-PBKMAN0000000400S_M01 ui-kbank-page-control activeSlide">
               <div className="page-inner-scroll">
                 <div className="main-tab-container">
-
-                  {/* 홈_전체메뉴*/}
                   <div
                     className="main-tab-content04"
-                    id="content_4"
-                    
+                    id="content_4" 
                   >
-                    {/* 스켈레톤 div. 필요한 영역에 넣어서 사용해 보세요
-                <div class="component-skeleton-sub">
-                  <span class="hide-txt">로딩중</span>
-                  <div class="skeleton-menu-group renewal skeleton-animation-all" aria-hidden="true">
-                    <div class="skeleton-header">
-                      <div class="skeleton-h-item00"></div>
-                    </div>
-                    <div class="skeleton-item00"></div>
-                    <div class="skeleton-item-group-01">
-                      <div class="skeleton-item01-group">
-                        <div class="skeleton-item01">
-                          <div class="skeleton-item01-img"></div>
-                          <div class="skeleton-item01-txt"></div>
-                        </div>
-                        <div class="skeleton-item01">
-                          <div class="skeleton-item01-img"></div>
-                          <div class="skeleton-item01-txt"></div>
-                        </div>
-                        <div class="skeleton-item01">
-                          <div class="skeleton-item01-img"></div>
-                          <div class="skeleton-item01-txt"></div>
-                        </div>
-                        <div class="skeleton-item01">
-                          <div class="skeleton-item01-img"></div>
-                          <div class="skeleton-item01-txt"></div>
-                        </div>
-                      </div>
-                      <div class="skeleton-item02-group">
-                        <div class="skeleton-item02"></div>
-                      </div>
-                    </div>
-                    <div class="skeleton-item03-group">
-                      <div class="skeleton-item03-item"></div>
-                      <div class="skeleton-item03-item"></div>
-                      <div class="skeleton-item03-item"></div>
-                      <div class="skeleton-item03-item"></div>
-                      <div class="skeleton-item03-item"></div>
-                      <div class="skeleton-item03-item"></div>
-                    </div>
-                  </div>
-                </div>*/}
                     <div className="main-tab-content-inner">
                       <div className="container-component">
-                        {/* 헤더 */}
                         <div className="component-header">
                           <div className="home-header-group">
                             <div className="home-header-col">
@@ -73,9 +45,7 @@ function menu() {
                             </div>
                             <div className="home-header-col">
                               <button className="btn-home-user" type="button">
-                                <span className="txt">유경</span>
-                                {/* 프로필사진일 때 이름 삭제 */}
-                                {/* <img class="img" src="./프로필사진" alt="프로필사진"> */}
+                                <span className="txt">인조</span>
                               </button>
                               <button className="btn-home-set" type="button">
                                 <span className="hide-txt">세팅</span>
@@ -105,49 +75,9 @@ function menu() {
                             </button>
                           </div>
                         </div>
-                        {/* 퀵메뉴링크 */}
+
                         <div className="component-link-quick">
-                          <div className="quick-menu-group">
-                            <div className="quick-link-group">
-                              {/* <a>메뉴가 1~3개일 때 */}
-                              <a className="btn-quick-link" href="#none">
-                                <i className="ico-quick">
-                                  <img
-                                    src="../../../../resource/img/mmk/main/ico_quick_cs.svg"
-                                    alt=""
-                                    aria-hidden="true"
-                                  />
-                                </i>
-                                <span className="txt-quick-link">고객센터</span>
-                              </a>
-                              <a
-                                className="btn-quick-link unconfirmed"
-                                href="#none"
-                              >
-                                <i className="ico-quick">
-                                  <img
-                                    src="../../../../resource/img/mmk/main/ico_quick_security.svg"
-                                    alt=""
-                                    aria-hidden="true"
-                                  />
-                                </i>
-                                <span className="txt-quick-link">인증/보안</span>
-                              </a>
-                              <a className="btn-quick-link" href="#none">
-                                <i className="ico-quick">
-                                  <img
-                                    src="../../../../resource/img/mmk/main/ico_quick_announce.svg"
-                                    alt=""
-                                    aria-hidden="true"
-                                  />
-                                </i>
-                                <span className="txt-quick-link">공지사항</span>
-                                <span className="unconfirmed">
-                                  <span className="hide-txt">알림</span>
-                                </span>
-                              </a>
-                            </div>
-                          </div>
+
                           <div className="quick-menu-group">
                             <div className="quick-link-group left">
                               {/* <a>메뉴가 4개 이상일 때 left 클래스 */}
@@ -200,32 +130,6 @@ function menu() {
                                   <span className="hide-txt">알림</span>
                                 </span>
                               </a>
-                              <a className="btn-quick-link" href="#none">
-                                <i className="ico-quick">
-                                  <img
-                                    src="../../../../resource/img/mmk/main/ico_quick_announce.svg"
-                                    alt=""
-                                    aria-hidden="true"
-                                  />
-                                </i>
-                                <span className="txt-quick-link">공지사항</span>
-                                <span className="unconfirmed">
-                                  <span className="hide-txt">알림</span>
-                                </span>
-                              </a>
-                              <a className="btn-quick-link" href="#none">
-                                <i className="ico-quick">
-                                  <img
-                                    src="../../../../resource/img/mmk/main/ico_quick_benefit.svg"
-                                    alt=""
-                                    aria-hidden="true"
-                                  />
-                                </i>
-                                <span className="txt-quick-link">혜택</span>
-                                <span className="unconfirmed">
-                                  <span className="hide-txt">알림</span>
-                                </span>
-                              </a>
                             </div>
                             <div className="quick-link-row">
                               <a className="link-list" href="#none">
@@ -236,17 +140,17 @@ function menu() {
                                     aria-hidden="true"
                                   />
                                 </div>
-                                <div className="item-text">내 자산보기</div>
+                                <div className="item-text">내 계좌 전체보기</div>
                                 <i className="ico-arrow-sbr" aria-hidden="true" />
                               </a>
                             </div>
                             <div className="quick-link-row">
                               <a className="link-list" href="#none">
                                 <div className="item-text">
-                                  오아시스마켓 장보기
+                                  내 신용관리
                                 </div>
                                 <div className="item-option">
-                                  최대 3% 적립 혜택
+                                  지금 내 신용점수는?
                                 </div>
                                 <i className="ico-arrow-sbr" aria-hidden="true" />
                               </a>
@@ -254,7 +158,29 @@ function menu() {
                           </div>
                         </div>
 
-                        {/* 최근방문 */}
+
+                      {groupedData?.map(
+                        (item) =>{
+                          if(item.MN_ORDER === 1){
+                            return 
+                            <>
+                            <div className="component-link-list">
+                            <div className="title-group">
+                              <div className="title-icon">
+                                {/* <img
+                                  src="../../../../resource/img/mmk/main/ico_menu_money.svg"
+                                  alt=""
+                                  aria-hidden="true"
+                                /> */}
+                              </div>
+                              <div className="title-field-01">{decodeURIComponent(item.MN_NM).replace(/\+/g, " ")}</div>
+                            </div>
+                            </div>
+                            </>
+                          }else{
+
+                          }
+
                         <div className="component-link-list">
                           <div className="title-group">
                             <div className="title-icon">
@@ -327,6 +253,7 @@ function menu() {
                             </li>
                           </ul>
                         </div>
+                      })}
                         {/* 생활 */}
                         <div className="component-link-list">
                           <div className="title-group">
@@ -600,19 +527,8 @@ function menu() {
                     </div>
                   </div>
                 </div>
-                {/* 홈 메뉴 네비게이션*/}
-                {/* s: 20220419 수정 (새알림 아이콘 추가 new-info)*/}
-                {/* s: 20230207 리뉴얼 홈탭 정기배포 적용 */}
-                {/* s: SR-2014 2022-10-25 로티이미지 추가로 인한 마크업 수정 */}
                 <BottomBar tab={"menu"}></BottomBar>
-                {/* e: 20230207 리뉴얼 홈탭 정기배포 적용 */}
-                {/* e: 20220419 수정 (새알림 아이콘 추가 new-info)*/}
-                {/* s: 20220427 상담원 답변영역 추가*/}
-                {/* s: 20220426 진행중 챗봇 버튼 영역*/}
-                {/* s: 20220518 텍스트 내용 수정*/}
                 <div className="component-btn">
-                  {/* 20220427 btn-chatbot영역에 ing 클래스 추가 - 상담원 답변이 노출되어야 할때 사용*/}
-                  {/* 20220419 btn-chatbot영역에 on 클래스 추가*/}
                   <button className="btn-chatbot" type="button">
                     <span className="hide-txt">챗봇</span>
                     <span className="chatbot-reply">
@@ -625,9 +541,6 @@ function menu() {
                     </i>
                   </button>
                 </div>
-                {/* e: 20220518 텍스트 내용 수정*/}
-                {/* e: 20220426 진행중 챗봇 버튼 영역*/}
-                {/* e: 20220427 상담원 답변영역 추가*/}
               </div>
             </div>
           </div>

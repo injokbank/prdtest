@@ -49,7 +49,6 @@ function event() {
     }
   }, []); // 빈 배열은 컴포넌트가 마운트될 때 한 번만 실행
 
-
   return ( 
     <>
     <Script
@@ -63,32 +62,13 @@ function event() {
 
     <div className="page-inner-scroll" ref={scrollRef}>
       <div className="main-tab-container">
-        {/* 홈_상품 FETASK-364 2023-01-03 홈_추천 => 홈_상품으로 수정 */}
         <div
           className="main-tab-content02"
           id="content_2"
         >
-          {/* 스켈레톤 div. 필요한 영역에 넣어서 사용해 보세요
-        <div class="component-skeleton"><span class="hide-txt">로딩중</span>
-          <div class="skeleton-rec-group skeleton-animation-all" aria-hidden="true">
-            <div class="skeleton-item01-group">
-              <div class="skeleton-item01"></div>
-              <div class="skeleton-item01"></div>
-              <div class="skeleton-item01"></div>
-              <div class="skeleton-item01"></div>
-            </div>
-            <div class="skeleton-item02-group">
-              <div class="skeleton-item02"></div>
-              <div class="skeleton-item02"></div>
-            </div>
-            <div class="skeleton-item03"></div>
-            <div class="skeleton-item04"></div>
-          </div>
-        </div>*/}
+
           <div className="main-tab-content-inner">
-            {/*s: FETASK-364 2023-01-03 상품탭 리뉴얼 */}
             <div className="container-component frm-prd">
-              {/* Product Header Tab */}
               <div className="headertab-products">
                 <div className="component-header">
                   <div className="home-header-group">
@@ -120,28 +100,22 @@ function event() {
                               </a>
                             </li>
                           )}
-
                         </ul>
                       </div>
                     </div>
                   </div>
                 </div>
-                {/*// 상단탭 */}
               </div>
-              {/*// Product Header Tab */}
-              {/* List */}
               <div className="component-products-carousel">
                 <div className="title-group">
                   <div className="title-field-page">
                     주목할 만한 상품
                   </div>
                 </div>
-                {/* Swiper */}
                 <div
                   className="product-carousel-group carousel-group ui-swiper"
                   data-space-between={10}
                 >
-                  {/* 카드 간 간격 */}
                   <div className="swiper-container">
                     <div className="swiper-wrapper">
                       <div className="swiper-slide">
@@ -155,14 +129,10 @@ function event() {
                                 src="../../../../resource/img/mmk/main/products/home/img_prod_home_cura_01.png"
                                 alt="자유적금"
                               />
-                              {/*s: FETASK-606 2023-03-02 마케팅 문구 건 */}
                               <p className="txt-notice">
                                 <span>금리가 올랐어요</span>
                                 <span />{" "}
-                                {/* 이모지가 없을때에는 왼쪽 span을 삭제해주세요 */}
                               </p>
-                              {/* ※ 마케팅 문구가 없을때에는 txt-notice 영역 전체를 삭제해주세요. */}
-                              {/*e: FETASK-606 2023-03-02 마케팅 문구 건 */}
                             </div>
                             <div className="product-info">
                               <div className="tit-product">
@@ -237,7 +207,6 @@ function event() {
                     </div>
                   </div>
                 </div>
-                {/*// Swiper */}
               </div>
 
               <div className="component-product-list">
@@ -246,7 +215,6 @@ function event() {
                 </div>
                 <div className="product-list-group">
                   <ul>
-
                     {data?._msg_._body_.pdRcmdFavSvrList.map((item) => (
                       item.viewType==='2' &&
                       <li>
@@ -259,13 +227,10 @@ function event() {
                       </a>
                     </li>
                     ))}
-
                   </ul>
                 </div>
               </div>
-
               <div className="component-product-list product-recommend">
-
                 <div className="title-group">
                   <div className="img-figure">
                     <img
@@ -296,29 +261,17 @@ function event() {
                       </a>
                     </li>
                   ))}
-
                   </ul>
                 </div>
               </div>
-              {/*// List */}
             </div>
-            {/*e: FETASK-364 2023-01-03 상품탭 리뉴얼 */}
           </div>
         </div>
       </div>
-      {/* 홈 메뉴 네비게이션*/}
-      {/* s: 20220419 수정 (새알림 아이콘 추가 new-info)*/}
-      {/* s: 20230207 리뉴얼 홈탭 정기배포 적용 */}
-      {/* s: SR-2014 2022-10-25 로티이미지 추가로 인한 마크업 수정 */}
+
       <BottomBar tab={"event"}></BottomBar>
-      {/* e: 20230207 리뉴얼 홈탭 정기배포 적용 */}
-      {/* e: 20220419 수정 (새알림 아이콘 추가 new-info)*/}
-      {/* s: 20220427 상담원 답변영역 추가*/}
-      {/* s: 20220426 진행중 챗봇 버튼 영역*/}
-      {/* s: 20220518 텍스트 내용 수정*/}
+
       <div className="component-btn">
-        {/* 20220427 btn-chatbot영역에 ing 클래스 추가 - 상담원 답변이 노출되어야 할때 사용*/}
-        {/* 20220419 btn-chatbot영역에 on 클래스 추가*/}
         <button className="btn-chatbot" type="button">
           <span className="hide-txt">챗봇</span>
           <span className="chatbot-reply">
@@ -331,9 +284,6 @@ function event() {
           </i>
         </button>
       </div>
-      {/* e: 20220518 텍스트 내용 수정*/}
-      {/* e: 20220426 진행중 챗봇 버튼 영역*/}
-      {/* e: 20220427 상담원 답변영역 추가*/}
     </div>
 
     </>

@@ -204,8 +204,6 @@ function home() {
 
               <div className="component-card">
                 <div className="home-card-layout-group">
-
-
                   {/* s: 20220616 Tip 추가*/}
                   {/* <div className="banner-tooltip-group open ui-tooltip">
                     <div className="tooltip-area">
